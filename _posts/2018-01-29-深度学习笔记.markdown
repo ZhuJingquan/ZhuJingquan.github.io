@@ -1,0 +1,78 @@
+---
+layout:     post
+title:      "深度学习笔记"
+subtitle:   " \"2018年第一课, Hello deep Learing\""
+date:       2017-01-29 19:00:00
+author:     "ZhuJingquan"
+header-img: "img/HIT.jpg"
+catalog: true
+tags:
+    - 机器学习
+typora-copy-images-to: ../img/in-post
+---
+
+> “Yeah It's on. ”
+
+# 前馈神经网络
+
+![1517060998283](../img/in-post/1517060998283.png)
+
+## 单层感知器
+
+### 网络结构
+
+- 输入层：d个输入节点，1个偏置节点（默认取1）用$i$来计数
+
+- 输入向量：$x=[1,x_1,x_2,\dots,x_d]^T$
+
+- 输出层：c个节点，用$j$来计数
+
+- 输出向量：$Z=[z_1,z_2,\dots,z_c]^T$
+
+- 权重集合：$\{w_{ij}\}$
+
+### 数学描述
+-  输出层节点$j$,其输入加权和为
+   $$
+   sum_j=\sum^d_{i=0}w_{ij}x_i=\mathrm{w^T_{ j}x} \space x_0=1 \\\mathrm{w_j}=[w_{0j},w_{1j},w_{2j},\dots,w_{dj}]^T
+   $$
+
+-  网络中的连接权重 w=$[\mathrm w_1,\mathrm w_2,\dots,\mathrm w_c]$
+
+-  经过激励函数后的输出值：
+   $$
+   z_j=f(sum_j)=f(\sum_{i=0}^d w{ij}x_i)=f(\mathrm{w_j^Tx})
+   $$
+   ​
+### 学习任务
+
+- 给定训练样本$\{\mathrm{x^k}\}^n_{k=1}$及相应的目标值$\{\mathrm{t^k}\}_{k=1}^n$,确定网络中的连接权重$\{w_{ij}\}$(d*c维)
+
+  n是训练样本的数量（样本参数）用k来计数，d是输入节点的数量（网络参数）
+
+- 当网络完成训练，期望实现$z^k=t^k,k=1,2,\dots,n$
+
+### 线性单元训练：$\delta$规则（梯度下降）
+
+- 损失函数：
+  $$
+  E(W)=\frac{1}{2}\sum_{k,j}(t_j^k-z_j^k)^2=\frac{1}{2}\sum_{k,j}(t_j^k-\sum w_{ij}x_i^k)^2
+  $$
+
+- 梯度：
+
+- $$
+  \frac{\partial E}{\partial w_{ij}}=-\sum_k(t_j^k-z_j^k)x_i^k
+  $$
+
+- 权重修正量：
+
+- $$
+  \Delta w_{ij}=-\eta \frac{\partial E}{\partial w_{ij}}=\eta \sum_k\delta_j^kx_i^k, \space \delta_j^k=t_j^k-z_j^k
+  $$
+
+- 梯度下降法：
+  $$
+  \mathrm w^{t+1}=\mathrm w^t-\eta\frac{\partial E}{\partial \mathrm w}=\mathrm w^t + \Delta \mathrm w\space 直至 |\Delta \mathrm w|<\epsilon
+  $$
+  ![1517064520905](../img/in-post/1517064520905.png)
