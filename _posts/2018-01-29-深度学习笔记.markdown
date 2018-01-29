@@ -76,3 +76,47 @@ typora-copy-images-to: ../img/in-post
   \mathrm w^{t+1}=\mathrm w^t-\eta\frac{\partial E}{\partial \mathrm w}=\mathrm w^t + \Delta \mathrm w\space 直至 |\Delta \mathrm w|<\epsilon
   $$
   ![1517064520905](../img/in-post/1517064520905.png)
+
+## 多层感知器
+
+相邻两层之间使用$\delta$规则
+
+- 
+
+- 隐含层-输出层
+  $$
+  \frac {\partial E}{\partial w_{hj}} = \frac {\partial E}{\partial a_{j}} \frac{\partial a_{j}}{\partial w_{hj}}
+  $$
+
+  $$
+  E=\frac{1}{2}\sum_{j}(t_j-z_j)^2=\frac{1}{2}\sum_j(t_j-f(a_j))^2
+  $$
+
+  $$
+  \frac{\partial E}{\partial a_j}=-f'_{a_j}\delta _j
+  $$
+
+  $$
+  a_j=\sum _{h=0}^e w_{hj} z_{hj}
+  $$
+
+  ​
+
+  把（9）带入（7）得到：
+  $$
+  \frac {\partial E}{\partial w_{hj}}=-f'_{a_j}\delta _j z_{hj}
+  $$
+
+
+
+- 输入层-隐含层
+  $$
+  \frac{\partial E}{\partial w_{ih}}=\frac {\partial E}{\partial a_h}\frac{\partial a_{h}}{\partial w_{ih}} =-f'_{a_h}\delta _h x_{ih}
+  $$
+
+  $$
+  \delta _h=\frac{\partial E}{\partial a_h}=\sum_{j=1}^c \frac{\partial E}{\partial a_j}  \frac{\partial a_j}{\partial z_h} \frac{\partial z_h}{\partial a_h}=\sum_{j=1}^c \delta _j w_{hj}f'(a_h)=\sum _{j=1}^{c}w_{hj}(\delta_jf'(a_h))
+  $$
+
+  ​
+
