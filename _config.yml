@@ -68,7 +68,7 @@ ga_domain: auto
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "写写代码，看看书，<br>To improve is to change, to be perfect is to change often."
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/HIT.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
