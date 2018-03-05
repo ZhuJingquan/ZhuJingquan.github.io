@@ -1,0 +1,28 @@
+#! /bin/bash
+date_stamp=$(date +%Y-%m-%d)
+template="/home/zhu/Documents/PersonalSite/ZhuJingquan.github.io/_posts/2018-01-29-tempate.markdown"
+post_dir="/home/zhu/Documents/PersonalSite/ZhuJingquan.github.io/_posts"
+
+read -p "Enter the file name : " fileName
+fileName=${date_stamp}-${fileName}
+echo -e "\n \033[93m Set file name : ${fileName} \033[0m:"
+
+cp ${template} ${post_dir}/${fileName}
+
+newPost=${post_dir}/${fileName}
+
+read -p "Enter the Post name : " postName
+
+echo -e "\n \033[93m Set post name : ${postName} \033[0m:"
+
+sed -i "s/In puts your name here/${postName}/g" ${newPost}
+
+read -p "Enter the Post name : " postTag
+
+echo -e "\n \033[93m Set post tag  : ${postTag} \033[0m:"
+sed -i "s/工作相关/${postTag}/g" ${newPost}
+sed -i "s/2017-02-06/${date_stamp}/g" ${newPost}
+sed -i "s/13:13:00/$(date +%H:%M:%S)/g" ${newPost}
+
+typora ${newPost}
+

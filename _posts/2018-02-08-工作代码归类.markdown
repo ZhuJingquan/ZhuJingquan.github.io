@@ -1,0 +1,126 @@
+---
+layout:     post
+title:      "工作代码归类描述"
+subtitle:   " \" just follow the standard way\""
+date:       2018-02-08 12:33:15
+author:     "朱景泉"
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - 工作
+typora-copy-images-to: ../img
+---
+
+> “Yeah It's on. ”
+
+## 毫米波雷达（MWR）
+
+SnsrProcess 中毫米波雷达的CAN代理程序
+
+移交人：孙银健
+
+问题：
+
+- 暂缺一期d2d部分CAN代理程序
+- im31高速障碍物抖动，怀疑问题源头在CAN代理；
+  - 解决措施：1，加入滤波（是否继续使用匀速直线模型）
+
+| 工程          | 模块          | 平台   | 项目   | 位置                                       | 备注          | VC状态      | TODO     |
+| ----------- | ----------- | ---- | ---- | ---------------------------------------- | ----------- | --------- | -------- |
+| SnsrProcess | SnsrProcess | px2  | im31 | [atd-im31-snsrprocess-develop](/program/MyWorks/MWR/GetFromSYJ/atd-im31-snsrprocess-develop.zip) | gitlab上现存代码 | 与gitlab一致 |          |
+| CanNet代理1   | SnsrProcess | px2  | im31 | [Template_cannet_1](/program/MyWorks/MWR/canNet_proxy/Template_cannet_1) | Can代理本地工程   | 本地git     | 解决高速抖动问题 |
+| CanNet代理2   | SnsrProcess | px2  | im31 | [Template_cannet_2](/program/MyWorks/MWR/canNet_proxy/Template_cannet_1) | Can代理本地工程   | 本地git     |          |
+
+MWR_Process
+
+移交人：孙银健
+
+任务描述：去噪、坐标变换、转发
+
+问题：
+
+- 自己写的track-lib正在写，还无法使用；需要写出一个通用的filter-track 框架，必须便于移植到iECU；
+- 0300由于博世雷达暂未安装，目前还未完成代码编写；
+
+| 工程                        | 模块                     | 平台       | 项目   | 位置                                       | 备注                  | VC状态      | TODO                 |
+| ------------------------- | ---------------------- | -------- | ---- | ---------------------------------------- | ------------------- | --------- | -------------------- |
+| mwr_process_ep21_px2      | pre-process            | px2      | ep21 | [mwr_process_ep21_px2](/program/MyWorks/MWR/Original_File/mwr_process_ep21_px2) | gitlab上现存代码         | 与gitlab一致 |                      |
+| mwr_process_IM31_px2      | pre-process            | px2      | im31 | [mwr_process_IM31_px2](/program/MyWorks/MWR/Original_File/mwr_process_IM31_px2) | gitlab上现存代码         | 与gitlab一致 |                      |
+| CtApMwrProcess            | SnsrProcess            | iECU0200 | ep21 | [CtApMwrProcess](/program/MyWorks/MWR/Original_File/CtApMwrProcess) | Can代理本地工程           | 本地git     |                      |
+|                           |                        |          |      |                                          |                     |           |                      |
+| VC_px2_ep21               | pre-process            | px2      | ep21 | [VC_px2_ep21](/program/MyWorks/MWR/VC_px2_ep21) | mwr-process本地工程     | 本地git     | 重构出一个简介的版本           |
+| VC_px2_IM31               | pre-process            | px2      | im31 | [VC_px2_IM31](/program/MyWorks/MWR/VC_px2_IM31) | mwr-process本地工程     | 本地git     | 重构出一个简介的版本           |
+| VC_IECU_ep21              | SnsrProcess            | iECU0200 | ep21 | [VC_IECU_ep21](/program/MyWorks/MWR/VC_IECU_ep21) | CtApMwrProcess 本地工程 | 本地git     |                      |
+| CtApMwrProcess_0300_Trans | SnsrProcess            | iECU0300 | ep21 | [CtApMwrProcess_0300_Trans](/program/MyWorks/MWR/CtApMwrProcess_0300_Trans) | CtApMwrProcess 本地工程 | 本地git     | 待博世雷达安装好后集成自己写的滤波库   |
+|                           |                        |          |      |                                          |                     |           |                      |
+| mwr_process_refacctor     | SnsrProcess&LaneFusion | px2      |      | [mwr_process_refacctor](/program/MyWorks/MWR/mwr_process_refacctor) | 了解项目架构时写的练手项目       | 无VC       | 无需继续写了，从这个框架中找打合适的架构 |
+| Filter_Tracker            | SnsrProcess去噪滤波库       | px2      |      | [Filter_Tracker](/program/MyWorks/debugTools/Fiter_Tracker) | 自己写的库，目前还无法使用       | 无VC       | 参考track——lib写一个自己的库  |
+
+
+
+
+
+
+
+---
+## 前向视觉（ME）
+
+SnsrProcess 中Mobileye Can消息解析
+
+移交人：陈光
+
+问题：
+
+- 缺Px2平台的NVIDIA驱动，程序无法完全编译，
+- 前期kss提供了freespace，VCB平台信息缺失严重；对LaneFusion无影响
+- 后期如需写CAN解析后通过lcm转发的程序，请参考[文档总结](/home/zhu/Documents/PersonalSite/ZhuJingquan.github.io/_posts/2018-01-29-CAN-DATA-PARSE.markdown)
+- TODO：check一下，精简为几个基本版本
+
+| 工程                       | 模块          | 平台    | 项目            | 位置                                       | 备注                  | VC状态      |
+| ------------------------ | ----------- | ----- | ------------- | ---------------------------------------- | ------------------- | --------- |
+| vcb_Template             | SnsrProcess | px2   | d2d           | [vcb_Template](/program/MyWorks/Mobileye/GetFromCG_PX2/atd-ep21-snsrprocess/vcb_Template) | 陈光移交代码，目测与gitlab一致  | 可编译运行，无VC |
+| kss_Template             | SnsrProcess | px2   | im31/ep21/d2d | [kss_Template](/program/MyWorks/Mobileye/GetFromCG_PX2/atd-ep21-snsrprocess/kss_Template) | 陈光移交代码，目测与gitlab一致  | 可编译运行，无VC |
+| kss                      | SnsrProcess | px2   | im31/ep21/d2d | [kss](/program/MyWorks/Mobileye/GetFromCG_PX2/atd-ep21-snsrprocess/kss) | 陈光移交代码，目测与gitlab一致  | 可编译运行，无VC |
+| kss_TaiJia               | SnsrProcess | px2台架 | im31/ep21/d2d | [kss_TaiJia](/program/MyWorks/Mobileye/GetFromCG_PX2/atd-ep21-snsrprocess/kss_TaiJia) | 台架版本有何不同？           | 本地git     |
+| mobileye                 | SnsrProcess | px2   | d2d           | [Mobileye](/program/MyWorks/Mobileye/GetFromCG_PX2/atd-ep21-snsrprocess/mobileye) | Tifocal，三目的输出是否有变化？ | 本地git     |
+|                          |             |       |               |                                          |                     |           |
+| PIE_ME_Process           | SnsrProcess | iECU  | ep21          | [PIE_ME_Process](/program/MyWorks/P3.0.0/PIE_ME_Process) | vcb移植到iECU          | 可编译无VC    |
+| PIE_LaneFusion           | SnsrProcess | iECU  | ep21          | [PIE_LaneFusion](/program/MyWorks/P3.0.0/PIE_LaneFusion) | iECU下的laneFusion    | 可编译无VC    |
+| PIE-I3.1.1.-P3.0.0-empty |             | iECU  | ep21          | [PIE-I3.1.1.-P3.0.0-empty](/home/zhu/Desktop/PIE-I3.1.1.-P3.0.0-empty) | 030PIE包             | build通过   |
+
+
+
+fusion 中Mobileye 车道线融合
+
+移交人：陈光
+
+问题：
+
+- 框架优化，代码重构,目前完成了一般，不过代码中的冗余代码（plot部分，debug部分，代码规范性）过多；
+- 代码移植到IECU或者px2（直接拷贝bin文件时没问题，不过push到gitlab时就有兼容问题），CMakeLists.txt需要兼容不同平台。
+| 工程                   | 模块     | 平台   | 项目       | 位置                                       | 备注          | VC状态      |
+| -------------------- | ------ | ---- | -------- | ---------------------------------------- | ----------- | --------- |
+| CG_LaneFusion        | fusion | px2  | im31/d2d | [CG_LaneFusion](/program/MyWorks/Mobileye/GetFromCG_PX2/LaneFusion/CG_LaneFusion) | 更新？？        | 与gitlab一致 |
+| CG_LaneFusion_Gitlab | fusion | px2  | im31/d2d | [CG_LaneFusion_Gitlab](/program/MyWorks/Mobileye/GetFromCG_PX2/LaneFusion/CG_LaneFusion_Gitlab) | gitlab上现存代码 | 无VC       |
+
+数据可视化与调试工具
+
+移交人：陈光
+
+问题：
+
+
+
+| 工程           | 模块   | 平台   | 项目            | 位置                                       | 备注               | VC状态 |
+| ------------ | ---- | ---- | ------------- | ---------------------------------------- | ---------------- | ---- |
+| Plot         |      | px2  | im31/d2d/ep21 | [Plot](/program/MyWorks/Mobileye/refactorOfME/Plot) | lcm头文件有可能不同工程补相同 | 无VC  |
+| viewer_OFILM |      | px2  | im31/d2d      | [viewer_OFILM](/program/MyWorks/debugTools/viewer_OFILM) | QGL显示程序          | 无VC  |
+| QGL_Observer |      |      |               | [QGL_Observer](/program/QGL_Observer/QGL_Observer) | 陈光给出的QGL显示程序     | 无VC  |
+
+---
+
+- 工作代码，尽量让写过的代码都能使用；
+- 去除冗余代码的同时，尽量确保留有足够的接口调试
+- 对变更封闭，对增加开放；
+- [Plot](/program/MyWorks/Mobileye/refactorOfME/Plot)
+- ​
