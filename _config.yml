@@ -1,23 +1,22 @@
 # Site settings
-title: Zhu Jingquan's Blog
-SEOTitle: 朱景泉的博客 | Zhu Jingquan Blog
+title: 朱小怂
+SEOTitle: 小怂的博客 | little-Song's Blog
 header-img: img/home-bg.jpg
 email: zhujingquanhit@126.com
 description: "自动驾驶相关 | 朱景泉，Tech & Geek Lover，Software Engineer in Autonomous vehicles | 这里是 @景泉 的个人博客，与你一起发现更大的世界。"
 keyword: "朱景泉, ZJQ朱景泉, Hux, 自动驾驶,环境感知,SLAM 朱景泉的博客, ZJQ Blog, 博客, 个人网站"
-url: "https://ZhuJingquan.github.io"         
-baseurl: "/blog"                             
+url: "47.101.151.112"              # your host, for absolute URL
+baseurl: "/huxblog-boilerplate"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     
+weibo_username:     huxpro
 zhihu_username:     zhujingquan
-github_username:    ZhuJingquan
-twitter_username:   
-#facebook_username:  huxpro
-# linkedin_username:  firstname-lastname-idxxxx
+github_username:    zhujingquan
+#twitter_username:  huxpro
+facebook_username:  huxpro
 
 
 
@@ -26,15 +25,15 @@ twitter_username:
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-#gems: [jekyll-paginate]
-plugins: [jekyll-paginate]
+gems: [jekyll-paginate]
+
 
 
 # Markdown settings
@@ -48,20 +47,22 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: Jingquan Zhu
+#disqus_username: _your_disqus_short_name_
 
-# Netease setttings
-netease_comment: false
+# Duoshuo settings
+duoshuo_username: huxblog
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
 
 
 
 # Analytics settings
-# Baidu Analytics 
-# ba_track_id: [your track id]
-
+# Baidu Analytics
+ba_track_id: 2fdf679f320751627964d07dfa85b498
 # Google Analytics
-ga_track_id: 'UA-113187235-1'            # Format: UA-xxxxxx-xx
-ga_domain: auto
+ga_track_id: 'UA-113187235-2'            # Format: UA-xxxxxx-xx
+ga_domain: 47.101.151.112
 
 
 
@@ -78,18 +79,22 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 
-# Progressive Web Apps
-chrome-tab-theme-color: "#000000"
-service-worker: true
-
-
-
 # Friends
 friends: [
-    {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
+    # {
+    #     title: "Hux Blog",
+    #     href: "http://huangxuan.me"
     # },{
-  
-    }
+    #     title: "Foo",
+    #     href: "#"
+    # },{
+    #     title: "Bar",
+    #     href: "#"
+    # },{
+    #     title: "Example Friends",
+    #     href: "#"
+    # },{
+    #     title: "It helps SEO",
+    #     href: "#"
+    # }
 ]
